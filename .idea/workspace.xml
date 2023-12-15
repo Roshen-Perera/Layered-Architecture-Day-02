@@ -8,21 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/ManageCustomersFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/ManageCustomersFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/dao/CustomerDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/dao/CustomerDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/HelloApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/MainFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/MainFormController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/ManageCustomersFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/ManageCustomersFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/ManageItemsFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/ManageItemsFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/PlaceOrderFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/controller/PlaceOrderFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/db/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/db/DBConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/CustomerDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/CustomerDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/ItemDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/ItemDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/OrderDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/OrderDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/OrderDetailDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/model/OrderDetailDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/CustomerTM.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/CustomerTM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/ItemTM.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/ItemTM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/OrderDetailTM.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/OrderDetailTM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/OrderTM.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/view/tdm/OrderTM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/dao/CustomerDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/layeredarchitecture/dao/CustomerDAOImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +39,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.HelloApplication.executor": "Debug",
+    "Application.HelloApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -113,7 +100,7 @@
       <workItem from="1702533850550" duration="16000" />
       <workItem from="1702533906960" duration="128000" />
       <workItem from="1702610746141" duration="267000" />
-      <workItem from="1702611075072" duration="10387000" />
+      <workItem from="1702611075072" duration="12318000" />
     </task>
     <task id="LOCAL-00001" summary="With Save on DAO">
       <option name="closed" value="true" />

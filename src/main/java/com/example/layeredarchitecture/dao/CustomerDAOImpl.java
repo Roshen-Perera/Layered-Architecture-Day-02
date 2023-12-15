@@ -41,6 +41,7 @@ public class CustomerDAOImpl {
         pstm.setString(2, dto.getName());
         pstm.setString(3, dto.getAddress());
 
+
         pstm.executeUpdate();
 
     }
@@ -50,18 +51,6 @@ public class CustomerDAOImpl {
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
         pstm.setString(1, String.valueOf(id));
         pstm.executeUpdate();
-    }
-
-    public String generateID(String text) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
-        if (rst.next()) {
-            String id = rst.getString("id");
-            int newCustomerId = Integer.parseInt(id.replace("C00-", "")) + 1;
-            return String.format("C00-%03d", newCustomerId);
-        } else {
-            return "C00-001";
-        }
     }
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();

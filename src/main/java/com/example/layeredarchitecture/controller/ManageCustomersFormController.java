@@ -83,6 +83,7 @@ public class ManageCustomersFormController {
 
         txtCustomerAddress.setOnAction(event -> btnSave.fire());
         loadAllCustomers();
+        generateNewId();
     }
 
     private void loadAllCustomers() {
@@ -221,7 +222,7 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            String s = customerDAO.generateId();
+            return customerDAO.generateId();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {
