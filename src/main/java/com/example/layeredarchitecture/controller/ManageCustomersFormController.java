@@ -161,7 +161,7 @@ public class ManageCustomersFormController {
         }
 
         if (btnSave.getText().equalsIgnoreCase("save")) {
-            /*Save Customer*/
+            /*Save Customers*/
             try {
                 if (!customerDAO.existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
