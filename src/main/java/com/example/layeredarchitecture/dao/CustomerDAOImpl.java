@@ -5,7 +5,9 @@ import com.example.layeredarchitecture.model.CustomerDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
-public class CustomerDAOImpl {
+public class CustomerDAOImpl implements CustomerDAO{
+
+    @Override
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement statement = connection.createStatement();
@@ -18,6 +20,7 @@ public class CustomerDAOImpl {
         return customerList;
     }
 
+    @Override
     public void SaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
         CustomerDTO customerDTO = new CustomerDTO();
 
@@ -32,6 +35,7 @@ public class CustomerDAOImpl {
 
     }
 
+    @Override
     public void UpdateOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
         Connection connection = DBConnection.getDbConnection().getConnection();
@@ -46,12 +50,14 @@ public class CustomerDAOImpl {
 
     }
 
+    @Override
     public void DeleteOnAction(String id) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
         pstm.setString(1, String.valueOf(id));
         pstm.executeUpdate();
     }
+    @Override
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
@@ -59,6 +65,7 @@ public class CustomerDAOImpl {
         return pstm.executeQuery().next();
     }
 
+    @Override
     public String generateId() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
