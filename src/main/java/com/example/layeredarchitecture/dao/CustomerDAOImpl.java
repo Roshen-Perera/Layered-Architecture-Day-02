@@ -3,10 +3,7 @@ package com.example.layeredarchitecture.dao;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 public class CustomerDAOImpl {
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
@@ -22,7 +19,30 @@ public class CustomerDAOImpl {
         return getAllCustomer();
     }
 
-    public void btnSaveOnAction(){
+    public void btnSaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+        CustomerDTO customerDTO = new CustomerDTO();
+
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer (id,name, address) VALUES (?,?,?)");
+
+        pstm.setString(1, dto.getId());
+        pstm.setString(2, dto.getName());
+        pstm.setString(3, dto.getAddress());
+
+        pstm.executeUpdate();
+
+    }
+
+    public void btnUpdateOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET name=?, address=? WHERE id=?");
+
+        pstm.setString(1, dto.getId());
+        pstm.setString(2, dto.getName());
+        pstm.setString(3, dto.getAddress());
+
+        pstm.executeUpdate();
 
     }
 }
