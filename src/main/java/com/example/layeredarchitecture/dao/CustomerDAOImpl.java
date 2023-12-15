@@ -13,13 +13,12 @@ public class CustomerDAOImpl {
         ArrayList<CustomerDTO> customerList = new ArrayList<>();
         while (rst.next()){
             CustomerDTO customerDTO = new CustomerDTO(rst.getString("id"), rst.getString("name"), rst.getString("address"));
-            rst.getString(String.valueOf(customerDTO));
-            getAllCustomer();
+            customerList.add(customerDTO);
         }
-        return getAllCustomer();
+        return customerList;
     }
 
-    public void btnSaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+    public void SaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
         CustomerDTO customerDTO = new CustomerDTO();
 
         Connection connection = DBConnection.getDbConnection().getConnection();
@@ -33,7 +32,7 @@ public class CustomerDAOImpl {
 
     }
 
-    public void btnUpdateOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+    public void UpdateOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET name=?, address=? WHERE id=?");
@@ -44,5 +43,42 @@ public class CustomerDAOImpl {
 
         pstm.executeUpdate();
 
+    }
+
+    public void DeleteOnAction(String id) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
+        pstm.setString(1, String.valueOf(id));
+        pstm.executeUpdate();
+    }
+
+    public String generateID(String text) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
+        if (rst.next()) {
+            String id = rst.getString("id");
+            int newCustomerId = Integer.parseInt(id.replace("C00-", "")) + 1;
+            return String.format("C00-%03d", newCustomerId);
+        } else {
+            return "C00-001";
+        }
+    }
+    public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
+        pstm.setString(1, id);
+        return pstm.executeQuery().next();
+    }
+
+    public String generateId() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
+        if (rst.next()) {
+             String id = rst.getString("id");
+            int newCustomerId = Integer.parseInt(id.replace("C00-", "")) + 1;
+            return String.format("C00-%03d", newCustomerId);
+        } else {
+            return "C00-001";
+        }
     }
 }
