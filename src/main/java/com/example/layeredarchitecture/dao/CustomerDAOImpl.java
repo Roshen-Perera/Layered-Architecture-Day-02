@@ -21,4 +21,8 @@ public class CustomerDAOImpl {
         }
         return getAllCustomer();
     }
+
+    public void btnSaveOnAction(){
+
+    }
 }
