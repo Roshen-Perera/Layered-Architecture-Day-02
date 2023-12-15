@@ -202,7 +202,6 @@ public class ManageCustomersFormController {
 
 
     public void btnDelete_OnAction(ActionEvent actionEvent) {
-        /*Delete Customer*/
         String id = tblCustomers.getSelectionModel().getSelectedItem().getId();
         try {
             if (!customerDAO.existCustomer(id)) {
