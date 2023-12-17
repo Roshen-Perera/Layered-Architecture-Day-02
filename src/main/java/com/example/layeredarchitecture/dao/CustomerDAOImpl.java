@@ -14,7 +14,10 @@ public class CustomerDAOImpl implements CustomerDAO{
         ResultSet rst = statement.executeQuery("select * from customer");
         ArrayList<CustomerDTO> customerList = new ArrayList<>();
         while (rst.next()){
-            CustomerDTO customerDTO = new CustomerDTO(rst.getString("id"), rst.getString("name"), rst.getString("address"));
+            CustomerDTO customerDTO = new CustomerDTO(
+                    rst.getString("id"),
+                    rst.getString("name"),
+                    rst.getString("address"));
             customerList.add(customerDTO);
         }
         return customerList;
@@ -22,7 +25,6 @@ public class CustomerDAOImpl implements CustomerDAO{
 
     @Override
     public void SaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        CustomerDTO customerDTO = new CustomerDTO();
 
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer (id,name, address) VALUES (?,?,?)");

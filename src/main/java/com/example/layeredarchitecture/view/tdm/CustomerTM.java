@@ -7,7 +7,7 @@ public class CustomerTM implements Comparable<CustomerTM> {
     private String name;
     private String address;
 
-    public CustomerTM() {
+    public CustomerTM(String id) {
     }
 
     public CustomerTM(String id, String name, String address) {
