@@ -1,11 +1,12 @@
 package com.example.layeredarchitecture.dao;
 
 import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
 
 import java.sql.*;
 
-public class PlaceOrderDAOImpl {
+public class PlaceOrderDAOImpl implements PlaceOrderDAO{
 
     public String generateID() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
@@ -35,6 +36,5 @@ public class PlaceOrderDAOImpl {
         ResultSet rst = pstm.executeQuery();
         rst.next();
         return new ItemDTO(code, rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
-
     }
 }
