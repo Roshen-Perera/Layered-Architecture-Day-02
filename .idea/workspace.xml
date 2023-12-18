@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39ec975b-2390-4340-88d1-0b3c410d2ec2" name="Changes" comment="With Save on DAO">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/PlaceOrderFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/PlaceOrderFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/dao/CustomerDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/dao/CustomerDAOImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="39ec975b-2390-4340-88d1-0b3c410d2ec2" name="Changes" comment="With Save on DAO" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -106,6 +101,7 @@
       <workItem from="1702744385899" duration="4171000" />
       <workItem from="1702826399620" duration="1365000" />
       <workItem from="1702830810315" duration="7868000" />
+      <workItem from="1702911034846" duration="396000" />
     </task>
     <task id="LOCAL-00001" summary="With Save on DAO">
       <option name="closed" value="true" />
