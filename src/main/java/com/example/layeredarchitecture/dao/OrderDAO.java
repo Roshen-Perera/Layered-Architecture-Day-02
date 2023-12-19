@@ -4,7 +4,7 @@ import com.example.layeredarchitecture.model.ItemDTO;
 
 import java.sql.*;
 
-public interface PlaceOrderDAO {
+public interface OrderDAO {
     String generateID() throws SQLException, ClassNotFoundException;
 
     boolean existItem(String code) throws SQLException, ClassNotFoundException;

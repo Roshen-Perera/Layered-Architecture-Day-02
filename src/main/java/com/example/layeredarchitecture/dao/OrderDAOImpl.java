@@ -3,12 +3,10 @@ package com.example.layeredarchitecture.dao;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
-import com.example.layeredarchitecture.model.OrderDTO;
-import com.example.layeredarchitecture.model.OrderDetailDTO;
 
 import java.sql.*;
 
-public class PlaceOrderDAOImpl implements PlaceOrderDAO{
+public class OrderDAOImpl implements OrderDAO {
     Connection connection;
 
     {
@@ -22,8 +20,8 @@ public class PlaceOrderDAOImpl implements PlaceOrderDAO{
     }
 
     public String generateID() throws SQLException, ClassNotFoundException {
-        Statement stm = connection.createStatement();
-        ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
+        Statement pstm = connection.createStatement();
+        ResultSet rst = pstm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
 
         return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
     }
@@ -46,4 +44,26 @@ public class PlaceOrderDAOImpl implements PlaceOrderDAO{
         rst.next();
         return new ItemDTO(code, rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
     }
+
+    public CustomerDTO getCustomer(String id) throws SQLException {
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+        pstm.setString(1, id + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        return new CustomerDTO(id + "id", rst.getString("name"), rst.getString("address"));
+    }
+/*
+    public boolean saveOrder(OrderDTO dto) throws SQLException {
+        PreparedStatement pstm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
+        pstm.setString(1, dto.getOrderId());
+        pstm.setString(2, String.valueOf(Date.valueOf(dto.getOrderDate())));
+        pstm.setString(3, String.valueOf(dto.getOrderDate()));
+        return pstm.executeUpdate()>0;
+    }
+
+    public boolean existOrder(String orderId) throws SQLException {
+        PreparedStatement pstm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
+        pstm.setString(1, orderId);
+        return pstm.executeQuery().next();
+    }*/
 }
