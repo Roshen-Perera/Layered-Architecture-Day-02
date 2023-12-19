@@ -34,32 +34,32 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public void SaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean SaveOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer (id,name, address) VALUES (?,?,?)");
 
         pstm.setString(1, dto.getId());
         pstm.setString(2, dto.getName());
         pstm.setString(3, dto.getAddress());
 
-        pstm.executeUpdate();
+        return pstm.executeUpdate() > 0;
 
     }
 
     @Override
-    public void UpdateOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean UpdateOnAction(CustomerDTO dto) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET name=?, address=? WHERE id=?");
         pstm.setString(1, dto.getId());
         pstm.setString(2, dto.getName());
         pstm.setString(3, dto.getAddress());
-        pstm.executeUpdate();
+        return pstm.executeUpdate() > 0;
 
     }
 
     @Override
-    public void DeleteOnAction(String id) throws SQLException, ClassNotFoundException {
+    public boolean DeleteOnAction(String id) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
         pstm.setString(1, String.valueOf(id));
-        pstm.executeUpdate();
+        return pstm.executeUpdate() > 0;
     }
     @Override
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {

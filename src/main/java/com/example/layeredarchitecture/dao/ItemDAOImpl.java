@@ -2,9 +2,11 @@ package com.example.layeredarchitecture.dao;
 
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.ItemDTO;
+import com.example.layeredarchitecture.model.OrderDetailDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemDAOImpl implements ItemDAO{
     Connection connection;
@@ -36,8 +38,15 @@ public class ItemDAOImpl implements ItemDAO{
         return itemList;
     }
 
+    public ItemDTO findItem(String code) throws SQLException, ClassNotFoundException {
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
+        pstm.setString(1, code);
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        return new ItemDTO(code, rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
+    }
     @Override
-    public void btnItemSave(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean btnItemSave(ItemDTO dto) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
 
         pstm.setString(1, dto.getCode());
@@ -45,11 +54,11 @@ public class ItemDAOImpl implements ItemDAO{
         pstm.setBigDecimal(3, dto.getUnitPrice());
         pstm.setInt(4,dto.getQtyOnHand());
 
-        pstm.executeUpdate();
+        return pstm.executeUpdate() > 0;
     }
 
     @Override
-    public void btnItemUpdate(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean btnItemUpdate(ItemDTO dto) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
 
         pstm.setString(1, dto.getCode());
@@ -57,7 +66,7 @@ public class ItemDAOImpl implements ItemDAO{
         pstm.setBigDecimal(3, dto.getUnitPrice());
         pstm.setInt(4,dto.getQtyOnHand());
 
-        pstm.executeUpdate();
+        return pstm.executeUpdate() > 0;
     }
 
     @Override
@@ -78,5 +87,30 @@ public class ItemDAOImpl implements ItemDAO{
             return "I00-001";
         }
     }
+    public boolean updateItem(List<OrderDetailDTO> orderDetails) throws SQLException, ClassNotFoundException {
+        for (OrderDetailDTO dto : orderDetails) {
+            if (!updateItems(dto)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean updateItems(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+
+        ItemDTO item = findItem(dto.getItemCode());
+        item.setQtyOnHand(item.getQtyOnHand() - dto.getQty());
+
+        PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
+
+        pstm.setString(1, item.getDescription());
+        pstm.setBigDecimal(2, item.getUnitPrice());
+        pstm.setInt(3, item.getQtyOnHand());
+        pstm.setString(4, item.getCode());
+
+        return pstm.executeUpdate() > 0;
+    }
+
 
 }
