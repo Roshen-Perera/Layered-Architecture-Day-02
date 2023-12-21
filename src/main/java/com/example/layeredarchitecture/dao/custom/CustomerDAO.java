@@ -1,6 +1,7 @@
 package com.example.layeredarchitecture.dao.custom;
 
 import com.example.layeredarchitecture.dao.CrudDAO;
+import com.example.layeredarchitecture.dao.SQLUtil;
 import com.example.layeredarchitecture.model.CustomerDTO;
 
 import java.sql.*;
@@ -16,4 +17,6 @@ public interface CustomerDAO extends CrudDAO<CustomerDTO> {
     boolean delete(String id) throws SQLException, ClassNotFoundException;
     boolean exist(String id) throws SQLException, ClassNotFoundException;
     String generateId() throws SQLException, ClassNotFoundException;
+
+    CustomerDTO getCustomer(String id) throws SQLException, ClassNotFoundException;
 }

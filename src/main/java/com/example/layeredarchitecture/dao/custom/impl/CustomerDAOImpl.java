@@ -8,23 +8,12 @@ import com.example.layeredarchitecture.model.CustomerDTO;
 import java.sql.*;
 import java.util.ArrayList;
 public class CustomerDAOImpl implements CustomerDAO {
-    Connection connection;
-
-    {
-        try {
-            connection = DBConnection.getDbConnection().getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
         /*Statement statement = connection.createStatement();
         ResultSet rst = statement.executeQuery("select * from customer");*/
-        ResultSet rst = SQLUtil.execute("select * from customer");
+        ResultSet rst = SQLUtil.execute("SELECT * from customer");
         ArrayList<CustomerDTO> customerList = new ArrayList<>();
         while (rst.next()){
             CustomerDTO customerDTO = new CustomerDTO(
@@ -72,7 +61,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 //      PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
 //      pstm.setString(1, id);
 //      return pstm.executeQuery().next();
-        return SQLUtil.execute("SELECT id FROM Customer WHERE id=?", id);
+
+        ResultSet resultSet = SQLUtil.execute("SELECT id FROM customer WHERE id=?", id);
+        return resultSet.next();
     }
 
     @Override
@@ -87,4 +78,13 @@ public class CustomerDAOImpl implements CustomerDAO {
             return "C00-001";
         }
     }
+
+    public CustomerDTO getCustomer(String id) throws SQLException, ClassNotFoundException {
+//        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+//        pstm.setString(1, id + "");
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Customer WHERE id=?", id);
+        rst.next();
+        return new CustomerDTO(id + "id", rst.getString("name"), rst.getString("address"));
+    }
+
 }

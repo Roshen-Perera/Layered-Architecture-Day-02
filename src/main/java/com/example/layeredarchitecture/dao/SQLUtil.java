@@ -4,20 +4,22 @@ import com.example.layeredarchitecture.db.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SQLUtil {
-    public static <T> T execute(String sql, Object... objects) throws SQLException, ClassNotFoundException {
+    public static <T> T execute(String sql, Object... ob) throws SQLException, ClassNotFoundException {
+
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        for (int i = 0; i < objects.length; i++) {
-            pstm.setObject((i+1), objects[i]);
+
+        for (int i = 0; i < ob.length; i++) {
+            pstm.setObject((1+i),ob[i]);
         }
-        if(sql.startsWith("SELECT")){
+
+        if (sql.startsWith("SELECT")) {
             return (T) pstm.executeQuery();
-        }else{
-             return (T) (Boolean)(pstm.executeUpdate() > 0);
+        } else {
+            return (T)(Boolean)(pstm.executeUpdate() > 0);
         }
     }
 }
