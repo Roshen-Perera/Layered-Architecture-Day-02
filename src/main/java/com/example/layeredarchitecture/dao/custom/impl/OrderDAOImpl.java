@@ -20,8 +20,6 @@ public class OrderDAOImpl implements OrderDAO {
     ItemDAOImpl itemDAO = new ItemDAOImpl();
 
     public String generateID() throws SQLException, ClassNotFoundException {
-//        Statement pstm = connection.createStatement();
-//        ResultSet rst = pstm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
         ResultSet rst = SQLUtil.execute("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
         return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
     }
@@ -34,9 +32,9 @@ public class OrderDAOImpl implements OrderDAO {
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
-            boolean isExisted = exist(orderId);
+            boolean isExist = exist(orderId);
             /*if order id already exist*/
-            if (isExisted) {
+            if (isExist) {
                 return false;
             }
             connection.setAutoCommit(false);
@@ -44,7 +42,7 @@ public class OrderDAOImpl implements OrderDAO {
             /*Refactored*/
             boolean isSaved = save(new OrderDTO(orderId, orderDate, customerId));
             if(isSaved) {
-                boolean isOrderDetailSaved = orderDetailDAO.saveDetails(orderId, orderDetails);
+                boolean isOrderDetailSaved = orderDetailDAO.saveDetails(orderDetails);
                 if (isOrderDetailSaved) {
                     boolean isUpdated = itemDAO.updateItem(orderDetails);
                     if (isUpdated) {
@@ -69,7 +67,8 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)",dto.getOrderId(),
+                dto.getOrderDate(),dto.getCustomerId());
     }
 
     @Override
