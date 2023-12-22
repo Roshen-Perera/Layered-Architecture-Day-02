@@ -1,5 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.bo.ManageCustomerBO;
+import com.example.layeredarchitecture.bo.ManageCustomerBOImpl;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
 import com.example.layeredarchitecture.dao.custom.impl.CustomerDAOImpl;
 import com.example.layeredarchitecture.model.CustomerDTO;
@@ -43,6 +45,8 @@ public class ManageCustomersFormController {
 
     CustomerDAO customerDAO = new CustomerDAOImpl();
 
+    ManageCustomerBO customerBO = new ManageCustomerBOImpl();
+
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -75,7 +79,7 @@ public class ManageCustomersFormController {
         tblCustomers.getItems().clear();
         /*Get all customers*/
         try {
-            ArrayList<CustomerDTO> customerList = customerDAO.getAll();
+            ArrayList<CustomerDTO> customerList = customerBO.getAllCustomer();
             for (CustomerDTO customerDTO : customerList){
                 tblCustomers.getItems().add(new CustomerTM(customerDTO.getId(), customerDTO.getName(), customerDTO.getAddress()));
             }
@@ -143,8 +147,8 @@ public class ManageCustomersFormController {
             /*Save Customers*/
             try {
                 var dto = new CustomerDTO(id, name, address);
-                customerDAO.save(dto);
-                if (!customerDAO.exist(id)) {
+                customerBO.saveCustomer(dto);
+                if (!customerBO.existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -156,11 +160,11 @@ public class ManageCustomersFormController {
         } else {
             /*Update customer*/
             try {
-                if (!customerDAO.exist(id)) {
+                if (!customerBO.existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
                 var dto = new CustomerDTO(id, name, address);
-                customerDAO.update(dto);
+                customerBO.updateCustomer(dto);
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
             } catch (ClassNotFoundException e) {
@@ -183,10 +187,10 @@ public class ManageCustomersFormController {
     public void btnDelete_OnAction(ActionEvent actionEvent) {
         String id = tblCustomers.getSelectionModel().getSelectedItem().getId();
         try {
-            if (!customerDAO.exist(id)) {
+            if (!customerBO.existCustomer(id)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
-            customerDAO.delete(id);
+            customerBO.deleteCustomer(id);
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
             tblCustomers.getSelectionModel().clearSelection();
             initUI();
