@@ -1,5 +1,6 @@
 package com.example.layeredarchitecture.dao.custom.impl;
 
+import com.example.layeredarchitecture.bo.PlaceOrderBOImpl;
 import com.example.layeredarchitecture.dao.SQLUtil;
 import com.example.layeredarchitecture.dao.custom.OrderDAO;
 import com.example.layeredarchitecture.db.DBConnection;
@@ -29,17 +30,22 @@ public class OrderDAOImpl implements OrderDAO {
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException {
         /*Transaction*/
-        Connection connection = null;
+        PlaceOrderBOImpl placeOrderBO = new PlaceOrderBOImpl();
+        return placeOrderBO.placeOrder(orderId, orderDate, customerId, orderDetails);
+
+
+
+        /*Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
             boolean isExist = exist(orderId);
-            /*if order id already exist*/
+            *//*if order id already exist*//*
             if (isExist) {
                 return false;
             }
             connection.setAutoCommit(false);
 
-            /*Refactored*/
+            *//*Refactored*//*
             boolean isSaved = save(new OrderDTO(orderId, orderDate, customerId));
             if(isSaved) {
                 boolean isOrderDetailSaved = orderDetailDAO.saveDetails(orderDetails);
@@ -57,7 +63,7 @@ public class OrderDAOImpl implements OrderDAO {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
+        return false;*/
     }
 
     @Override

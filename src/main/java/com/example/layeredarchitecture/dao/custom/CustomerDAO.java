@@ -19,4 +19,6 @@ public interface CustomerDAO extends CrudDAO<CustomerDTO> {
     String generateId() throws SQLException, ClassNotFoundException;
 
     CustomerDTO getCustomer(String id) throws SQLException, ClassNotFoundException;
+
+
 }

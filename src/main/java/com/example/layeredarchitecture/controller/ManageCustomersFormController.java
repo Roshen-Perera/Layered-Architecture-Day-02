@@ -38,13 +38,10 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
-    private static Connection connection;
-
-    private static CustomerDAO customerDAO = new CustomerDAOImpl();
-
     /*private ObservableList<CustomerDTO> observableList = new ObservableList<CustomerDTO>() {
     }*/
 
+    CustomerDAO customerDAO = new CustomerDAOImpl();
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
