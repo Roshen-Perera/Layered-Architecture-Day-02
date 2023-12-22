@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec975b-2390-4340-88d1-0b3c410d2ec2" name="Changes" comment="With Save on DAO">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/ManageCustomerBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/ManageCustomerBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/ManageCustomerBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/ManageCustomerBOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/ManageCustomersFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/ManageCustomersFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/BOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/BOFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/custom/impl/ManageCustomerBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/custom/impl/ManageCustomerBOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/custom/impl/ManageItemBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/custom/impl/ManageItemBOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/custom/impl/PlaceOrderBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/bo/custom/impl/PlaceOrderBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/ManageItemsFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/layeredarchitecture/controller/ManageItemsFormController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +81,7 @@
       <module name="layered-architecture" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.layeredarchitecture.bo.*" />
+          <option name="PATTERN" value="com.example.layeredarchitecture.bo.custom.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -126,6 +127,7 @@
       <workItem from="1703142692324" duration="9587000" />
       <workItem from="1703162668044" duration="7003000" />
       <workItem from="1703214795507" duration="10269000" />
+      <workItem from="1703226013926" duration="6464000" />
     </task>
     <task id="LOCAL-00001" summary="With Save on DAO">
       <option name="closed" value="true" />

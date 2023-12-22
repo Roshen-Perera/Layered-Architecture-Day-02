@@ -1,5 +1,6 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.bo.BOFactory;
 import com.example.layeredarchitecture.bo.custom.ManageCustomerBO;
 import com.example.layeredarchitecture.bo.custom.impl.ManageCustomerBOImpl;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
@@ -43,9 +44,7 @@ public class ManageCustomersFormController {
     /*private ObservableList<CustomerDTO> observableList = new ObservableList<CustomerDTO>() {
     }*/
 
-    CustomerDAO customerDAO = new CustomerDAOImpl();
-
-    ManageCustomerBO customerBO = new ManageCustomerBOImpl();
+    ManageCustomerBO customerBO = (ManageCustomerBO) BOFactory.getboFactory().getBO(BOFactory.BOTypes.CUSTOMER);
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -204,7 +203,7 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            return customerDAO.generateId();
+            return customerBO.generateCustomerID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {

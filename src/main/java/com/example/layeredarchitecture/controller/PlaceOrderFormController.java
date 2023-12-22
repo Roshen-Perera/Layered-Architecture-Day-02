@@ -1,5 +1,6 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.bo.BOFactory;
 import com.example.layeredarchitecture.bo.custom.PlaceOrderBO;
 import com.example.layeredarchitecture.bo.custom.impl.PlaceOrderBOImpl;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
@@ -58,10 +59,7 @@ public class PlaceOrderFormController {
     public Label lblTotal;
     private String orderId;
 
-    private OrderDAO orderDAO = new OrderDAOImpl();
-    private CustomerDAO customerDAO = new CustomerDAOImpl();
-    private ItemDAO itemDAO = new ItemDAOImpl();
-    private PlaceOrderBO placeOrderBO = new PlaceOrderBOImpl();
+    private PlaceOrderBO placeOrderBO = (PlaceOrderBO) BOFactory.getboFactory().getBO(BOFactory.BOTypes.PLACE_ORDER);
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -293,7 +291,7 @@ public class PlaceOrderFormController {
 
     /*Refactored*/
     public void btnPlaceOrder_OnAction(ActionEvent actionEvent) throws SQLException {
-        boolean b = orderDAO.saveOrder(orderId, LocalDate.now(), cmbCustomerId.getValue(),
+        boolean b = placeOrderBO.placeOrder(orderId, LocalDate.now(), cmbCustomerId.getValue(),
                     tblOrderDetails.getItems().stream().map(tm -> new OrderDetailDTO(orderId, tm.getCode(), tm.getQty(), tm.getUnitPrice())).collect(Collectors.toList()));
         if (b) {
             new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
