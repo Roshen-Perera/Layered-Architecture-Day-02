@@ -4,6 +4,7 @@ import com.example.layeredarchitecture.bo.custom.ManageItemBO;
 import com.example.layeredarchitecture.dao.SuperDAO;
 import com.example.layeredarchitecture.dao.custom.ItemDAO;
 import com.example.layeredarchitecture.dao.custom.impl.ItemDAOImpl;
+import com.example.layeredarchitecture.entity.Item;
 import com.example.layeredarchitecture.model.ItemDTO;
 
 import java.sql.SQLException;
@@ -14,14 +15,19 @@ public class ManageItemBOImpl implements ManageItemBO {
     ItemDAO itemDAO = new ItemDAOImpl();
 
     public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
-        return itemDAO.getAll();
+        ArrayList<ItemDTO> itemDTOS = new ArrayList<>();
+        ArrayList<Item> items = itemDAO.getAll();
+        for (Item item : items){
+            itemDTOS.add(new ItemDTO(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+        }
+        return itemDTOS;
     }
     public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
-        return itemDAO.save(dto);
+        return itemDAO.save(new Item(dto.getCode(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
     }
 
     public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
-        return itemDAO.update(dto);
+        return itemDAO.update(new Item(dto.getCode(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
     }
 
     public boolean deleteItem(String id) throws SQLException, ClassNotFoundException {
