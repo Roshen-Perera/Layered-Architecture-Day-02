@@ -1,5 +1,9 @@
 package com.example.layeredarchitecture.dao.custom;
 
-public interface SQLQueryDAO {
+import com.example.layeredarchitecture.model.OrderListDTO;
 
+import java.sql.SQLException;
+
+public interface SQLQueryDAO {
+    OrderListDTO orderList() throws SQLException, ClassNotFoundException;
 }
