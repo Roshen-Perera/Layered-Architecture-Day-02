@@ -12,4 +12,10 @@ module com.example.layeredarchitecture {
     exports com.example.layeredarchitecture.controller;
     exports com.example.layeredarchitecture.bo;
     opens com.example.layeredarchitecture.bo to javafx.fxml;
+    exports com.example.layeredarchitecture.bo.custom.impl;
+    opens com.example.layeredarchitecture.bo.custom.impl to javafx.fxml;
+    exports com.example.layeredarchitecture.bo;
+    opens com.example.layeredarchitecture.bo to javafx.fxml;
+    exports com.example.layeredarchitecture.bo.custom;
+    opens com.example.layeredarchitecture.bo.custom to javafx.fxml;
 }

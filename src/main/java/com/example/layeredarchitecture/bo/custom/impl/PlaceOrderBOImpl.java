@@ -1,6 +1,10 @@
-package com.example.layeredarchitecture.bo;
+package com.example.layeredarchitecture.bo.custom.impl;
 
+import com.example.layeredarchitecture.bo.custom.PlaceOrderBO;
+import com.example.layeredarchitecture.dao.DAOFactory;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
+import com.example.layeredarchitecture.dao.custom.ItemDAO;
+import com.example.layeredarchitecture.dao.custom.OrderDAO;
 import com.example.layeredarchitecture.dao.custom.impl.CustomerDAOImpl;
 import com.example.layeredarchitecture.dao.custom.impl.ItemDAOImpl;
 import com.example.layeredarchitecture.dao.custom.impl.OrderDAOImpl;
@@ -17,11 +21,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaceOrderBOImpl implements PlaceOrderBO{
-    OrderDetailDAOImpl orderDetailDAO = new OrderDetailDAOImpl();
+public class PlaceOrderBOImpl implements PlaceOrderBO {
+    OrderDetailDAOImpl orderDetailDAO = (OrderDetailDAOImpl) DAOFactory.getdaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
     CustomerDAO customerDAO = new CustomerDAOImpl();
-    ItemDAOImpl itemDAO = new ItemDAOImpl();
-    OrderDAOImpl orderDAO = new OrderDAOImpl();
+    ItemDAO itemDAO = new ItemDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+
+
     public boolean placeOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException {
         /*Transaction*/
         Connection connection = null;
