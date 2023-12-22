@@ -9,6 +9,8 @@ import com.example.layeredarchitecture.dao.custom.OrderDAO;
 import com.example.layeredarchitecture.dao.custom.impl.CustomerDAOImpl;
 import com.example.layeredarchitecture.dao.custom.impl.ItemDAOImpl;
 import com.example.layeredarchitecture.dao.custom.impl.OrderDAOImpl;
+import com.example.layeredarchitecture.entity.Customer;
+import com.example.layeredarchitecture.entity.Item;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDetailDTO;
@@ -112,7 +114,7 @@ public class PlaceOrderFormController {
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
                         /*Refactored*/
-                        CustomerDTO customerDTO = placeOrderBO.searchCustomer(newValue);
+                        Customer customerDTO = placeOrderBO.searchCustomer(newValue);
                         txtCustomerName.setText(customerDTO.getName());
 
                     } catch (SQLException e) {
@@ -140,7 +142,7 @@ public class PlaceOrderFormController {
 //                        throw new NotFoundException("There is no such item associated with the id " + code);
                     }
                     /*Refactored*/
-                    ItemDTO itemDTO = placeOrderBO.searchItem(cmbItemCode.getValue());
+                    Item itemDTO = placeOrderBO.searchItem(cmbItemCode.getValue());
                     txtDescription.setText(itemDTO.getDescription());
                     txtUnitPrice.setText(itemDTO.getUnitPrice().setScale(2).toString());
 

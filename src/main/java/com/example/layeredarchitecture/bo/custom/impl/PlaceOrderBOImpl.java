@@ -2,15 +2,13 @@ package com.example.layeredarchitecture.bo.custom.impl;
 
 import com.example.layeredarchitecture.bo.custom.PlaceOrderBO;
 import com.example.layeredarchitecture.dao.DAOFactory;
-import com.example.layeredarchitecture.dao.SuperDAO;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
 import com.example.layeredarchitecture.dao.custom.ItemDAO;
 import com.example.layeredarchitecture.dao.custom.OrderDAO;
-import com.example.layeredarchitecture.dao.custom.impl.CustomerDAOImpl;
-import com.example.layeredarchitecture.dao.custom.impl.ItemDAOImpl;
-import com.example.layeredarchitecture.dao.custom.impl.OrderDAOImpl;
 import com.example.layeredarchitecture.dao.custom.impl.OrderDetailDAOImpl;
 import com.example.layeredarchitecture.db.DBConnection;
+import com.example.layeredarchitecture.entity.Customer;
+import com.example.layeredarchitecture.entity.Item;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
 import com.example.layeredarchitecture.model.OrderDTO;
@@ -62,11 +60,11 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
         return false;
     }
 
-    public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
+    public Customer searchCustomer(String id) throws SQLException, ClassNotFoundException {
         return customerDAO.getCustomer(id);
     }
 
-    public ItemDTO searchItem(String id) throws SQLException, ClassNotFoundException {
+    public Item searchItem(String id) throws SQLException, ClassNotFoundException {
         return itemDAO.getItem(id);
     }
 
@@ -83,10 +81,42 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
     }
 
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
-        return customerDAO.getAll();
+        ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
+        ArrayList<Customer> customers = customerDAO.getAll();
+        for (Customer customer : customers){
+            customerDTOS.add(new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress()));
+        }
+        return customerDTOS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
-        return itemDAO.getAll();
+        ArrayList<ItemDTO> itemDTOS = new ArrayList<>();
+        ArrayList<Item> items = itemDAO.getAll();
+        for (Item item : items){
+            itemDTOS.add(new ItemDTO(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+        }
+        return itemDTOS;
     }
 }
